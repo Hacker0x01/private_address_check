@@ -39,4 +39,9 @@ class PrivateAddressCheckTest < Minitest::Test
   def test_private_address_for_malformed_addresses
     assert PrivateAddressCheck.resolves_to_private_address?("127.1")
   end
+
+  def test_private_address_for_ipv6_to_ipv4_mapping
+    assert PrivateAddressCheck.private_address?("::ffff:7f00:1")
+    assert PrivateAddressCheck.private_address?("::ffff:a9fe:a9fe")
+  end
 end
