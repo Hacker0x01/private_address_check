@@ -35,7 +35,8 @@ module PrivateAddressCheck
     IPAddr.new("2002::/16"),       # 6to4
     IPAddr.new("fc00::/7"),        # Unique local address
     IPAddr.new("fe80::/10"),       # Link-local address
-    IPAddr.new("ff00::/8")         # Multicast
+    IPAddr.new("ff00::/8"),        # Multicast
+    IPAddr.new("::ffff:0:0/96")    # IPv6 > IPv4 mapping (compatibility mode)
   ].freeze
 
   def private_address?(address)
