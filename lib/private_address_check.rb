@@ -11,6 +11,7 @@ module PrivateAddressCheck
   CIDR_LIST = [
     IPAddr.new("127.0.0.0/8"),     # Loopback
     IPAddr.new("::1/128"),         # Loopback
+    IPAddr.new("::/96"),           # IPv4-compatible IPv6 (deprecated, RFC 4291 §2.5.5.1); includes ::, ::127.0.0.1
     IPAddr.new("0.0.0.0/8"),       # Current network (only valid as source address)
     IPAddr.new("169.254.0.0/16"),  # Link-local
     IPAddr.new("10.0.0.0/8"),      # Private network

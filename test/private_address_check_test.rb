@@ -44,4 +44,24 @@ class PrivateAddressCheckTest < Minitest::Test
     assert PrivateAddressCheck.private_address?("::ffff:7f00:1")
     assert PrivateAddressCheck.private_address?("::ffff:a9fe:a9fe")
   end
+
+  def test_private_address_for_ipv4_compatible_ipv6
+    assert PrivateAddressCheck.private_address?("::")
+    assert PrivateAddressCheck.private_address?("::127.0.0.1")
+    assert PrivateAddressCheck.private_address?("::7f00:1")
+    assert PrivateAddressCheck.private_address?("::10.0.0.1")
+    assert PrivateAddressCheck.private_address?("::a9fe:a9fe")
+    assert PrivateAddressCheck.private_address?("::192.168.1.1")
+    assert PrivateAddressCheck.private_address?("::8.8.8.8")
+    assert PrivateAddressCheck.private_address?("0:0:0:0:0:0:7f00:1")
+  end
+
+  def test_private_address_for_ipv4_compatible_ipv6_object
+    assert PrivateAddressCheck.private_address?(IPAddr.new("::127.0.0.1"))
+  end
+
+  def test_public_ipv6_not_affected_by_ipv4_compatible_range
+    refute PrivateAddressCheck.private_address?("2606:4700:4700::1111")
+    refute PrivateAddressCheck.private_address?("1::7f00:1")
+  end
 end
